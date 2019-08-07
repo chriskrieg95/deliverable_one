@@ -46,9 +46,10 @@ public class WhatToEat {
 
 		}
 
-		// Asks the user about how many guests there will be attending the event
+		// Asks the user about how many guests there will be attending the event.
 		System.out.println("Around how many guests will you be serving?");
 
+		// This validates whether the the user inputed a valid integer.
 		while (partySize <= 0) {
 
 			try {
@@ -71,6 +72,7 @@ public class WhatToEat {
 
 		input.close();
 
+		// Prints the final message.
 		result = "Since you’re hosting a " + eventType + " event for " + partySize
 				+ " participants, you should serve \n" + meal + " prepared " + preparation + ".";
 		System.out.println(result);
