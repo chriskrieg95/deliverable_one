@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class WhatToEat {
 	public static void main(String[] args) {
-		
+
 		String eventType = "";
 		String meal = "";
 		int partySize = 0;
@@ -18,44 +18,49 @@ public class WhatToEat {
 		eventOptions.add("casual");
 		eventOptions.add("semi-formal");
 		eventOptions.add("formal");
-		
+
 		// Asks the user what type of event he/she will be hosting.
 		System.out.println(
 				"What kind of event will you be hosting? Choose from the following: casual, semi-formal, formal");
 		eventType = input.nextLine();
-		
+
 		// This validates whether the user chose one of the options.
 		do {
 			if (eventOptions.contains(eventType)) {
 				isOption = true;
-			}
-			else {
+			} else {
 				System.out.println("Please choose from the following options: casual, semi-formal, or formal.");
 				isOption = false;
 				eventType = input.nextLine();
 			}
-				
+
 		} while (!(isOption));
 
 		if ("casual".equals(eventType)) {
 			meal = "sandwiches";
-		}
-		else if ("semi-formal".equals(eventType)) {
+		} else if ("semi-formal".equals(eventType)) {
 			meal = "fried chicken";
-		}
-		else if ("formal".equals(eventType)) {
+		} else if ("formal".equals(eventType)) {
 			meal = "chicken parmesan";
-		}
-		else {
-
+		} else {
 
 		}
-		
+
 		// Asks the user about how many guests there will be attending the event
 		System.out.println("Around how many guests will you be serving?");
 		partySize = input.nextInt();
 		
-		
+		do {
+			if (partySize > 0) {
+				isNumber = true;
+			} else {
+				System.out.println("Please enter a non-negative, whole number other than 0.");
+				isNumber = false;
+				partySize = input.nextInt();
+			}
+
+		} while (!(isNumber));
+
 		if (partySize == 1) {
 			preparation = "in your microwave";
 		} else if (partySize >= 2 && partySize <= 12) {
