@@ -1,6 +1,7 @@
 package deliverable_one;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class WhatToEat {
@@ -8,11 +9,10 @@ public class WhatToEat {
 
 		String eventType = "";
 		String meal = "";
-		int partySize = 0;
+		int partySize = -1;
 		String preparation = "";
 		String result;
 		Scanner input = new Scanner(System.in);
-		boolean isNumber;
 		boolean isOption;
 		ArrayList<String> eventOptions = new ArrayList<String>(4);
 		eventOptions.add("casual");
@@ -48,28 +48,28 @@ public class WhatToEat {
 
 		// Asks the user about how many guests there will be attending the event
 		System.out.println("Around how many guests will you be serving?");
-		partySize = input.nextInt();
-		
-		do {
-			if (partySize > 0) {
-				isNumber = true;
-			} else {
-				System.out.println("Please enter a non-negative, whole number other than 0.");
-				isNumber = false;
+
+		while (partySize <= 0) {
+
+			try {
 				partySize = input.nextInt();
+				if (partySize == 1) {
+					preparation = "in your microwave";
+				} else if (partySize >= 2 && partySize <= 12) {
+					preparation = "in your kitchen";
+				} else if (partySize >= 13) {
+					preparation = "by a caterer";
+				} else {
+					System.out.println("Please enter a non-negative, whole number other than 0.");
+				}
+			} catch (InputMismatchException ex) {
+				System.out.println("Please enter a non-negative, whole number other than 0.");
+				input.next();
 			}
-
-		} while (!(isNumber));
-
-		if (partySize == 1) {
-			preparation = "in your microwave";
-		} else if (partySize >= 2 && partySize <= 12) {
-			preparation = "in your kitchen";
-		} else if (partySize >= 13) {
-			preparation = "by a caterer";
-		} else {
-
 		}
+
+
+		input.close();
 
 		result = "Since you’re hosting a " + eventType + " event for " + partySize
 				+ " participants, you should serve \n" + meal + " prepared " + preparation + ".";
